@@ -3,7 +3,10 @@ ALIBABA_API_URL = 'http://gw.api.alibaba.com/openapi/param2/2/portals.open/%(api
 ALIBABA_API_CALLS = {
     'list': 'api.listPromotionProduct',
     'details': 'api.getPromotionProductDetail',
-    'links': 'api.getPromotionLinks'
+    'links': 'api.getPromotionLinks',
+    'similar': 'api.listSimilarProducts',
+    'completed_orders': 'api.getCompletedOrders',
+
 }
 
 ALIBABA_API_PARAMS = {
@@ -32,6 +35,17 @@ ALIBABA_API_PARAMS = {
         'fields',
         'trackingId',
         'urls'
+    ],
+    'completed_orders': [
+        'appSignature',
+        'startDate',
+        'endDate',
+        'liveOrderStatus',
+        'pageNo',
+        'pageSize'
+    ],
+    'similar': [
+        'productId'
     ]
 }
 
@@ -83,7 +97,33 @@ ALIBABA_API_FIELDS = {
         'url',
         'promotionUrl',
         'localPrice'
-        
+    ],
+
+    'completed_orders': [
+        'totalResults',
+        'orderTime',
+        'transactionTime',
+        'orderNumber',
+        'product',
+        'orderStatus'
+        'commissionRate',
+        'paymentAmount',
+        'estimatedCommission',
+        'finalPaymentAmount',
+        'commission',
+        'PID',
+        'extraParams'
+    ],
+
+    'similar': [
+        'totalResults',
+        'productId',
+        'productTitle',
+        'productUrl',
+        'imageUrl',
+        'salePrice',
+        'volume',
+        'validTime'
     ]
 }
 
@@ -167,5 +207,19 @@ ALIBABA_API_ERROR_CODES = {
         20030060: 'Fields input parameter error',
         20030070: 'Tracking ID input parameter error',
         20030080: 'URL input parameter error or beyond the maximum number of the URLs'
+    },
+    'completed_orders': {
+        20010000: 'Call succeeds',
+        20020000: 'System Error',
+        20030070: 'Unauthorized transfer request',
+        20030000: 'Required parameters',
+        20030140: 'Page number input parameter error',
+        20030150: 'Page size input parameter error'
+    },
+    'similar': {
+        20010000: 'Call succeeds',
+        20020000: 'System Error',
+        20030070: 'Unauthorized transfer request',
+        20030000: 'Required parameters'
     }
 }

@@ -19,14 +19,19 @@ LOGGER = logging.getLogger(__name__)
 class AliExpress(object):
     api_key = None
     affiliate_id = None
+    app_signature = None
 
-    def __init__(self, api_key, affiliate_id=None):
+    def __init__(self, api_key, affiliate_id=None, app_signature=None):
         self.api_key = api_key
         self.affiliate_id = affiliate_id
+        self.app_signature = app_signature
 
-    def get_product_list(self, fields, keywords, **kwargs):
+    def get_product_list(self, fields, keywords, page, **kwargs):
         if not isinstance(fields, list):
             raise ValueError('Parameter %s must be a list', 'fields')
+
+        if not page:
+            page = 1
 
         for field in fields:
             if field not in ALIBABA_API_FIELDS['list']:
@@ -34,7 +39,8 @@ class AliExpress(object):
 
         params = {
             'fields': ','.join(fields),
-            'keywords': keywords
+            'keywords': keywords,
+            'pageNo': page
         }
 
         for param, value in kwargs.items():
@@ -103,12 +109,27 @@ class AliExpress(object):
         else:
             return None
 
+    def get_similar_products(self, productId):
+
+        params = {
+            'productId': productId,
+        }
+        response = self._make_call('similar', params)
+
+        if 'result' in response:
+            return response['result']
+        else:
+            return None
+
     def _make_call(self, call, params):
         url = ALIBABA_API_URL % {
             'api_call': ALIBABA_API_CALLS[call],
             'api_key': self.api_key,
             'call_parameters': urlencode(params)
         }
+
+        print(url)
+
         LOGGER.info('Perform API request url: %s' % url)
         response = urlopen(url)
 
