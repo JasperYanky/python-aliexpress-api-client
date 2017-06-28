@@ -26,12 +26,9 @@ class AliExpress(object):
         self.affiliate_id = affiliate_id
         self.app_signature = app_signature
 
-    def get_product_list(self, fields, keywords, page, **kwargs):
+    def get_product_list(self, fields, keywords, **kwargs):
         if not isinstance(fields, list):
             raise ValueError('Parameter %s must be a list', 'fields')
-
-        if not page:
-            page = 1
 
         for field in fields:
             if field not in ALIBABA_API_FIELDS['list']:
@@ -40,7 +37,6 @@ class AliExpress(object):
         params = {
             'fields': ','.join(fields),
             'keywords': keywords,
-            'pageNo': page
         }
 
         for param, value in kwargs.items():

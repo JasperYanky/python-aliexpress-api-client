@@ -10,7 +10,7 @@ Usage example
 ``` python
 from aliexpress_api_client import AliExpress
 
-aliexpress = AliExpress('api_key', 'affiliate_id')
+aliexpress = AliExpress('api_key', 'affiliate_id', 'app_signature')
 ```
 
 **Get product list:**
