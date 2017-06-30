@@ -29,13 +29,16 @@ ALIBABA_API_PARAMS = {
     ],
     'details': [
         'fields',
-        'productId'
+        'productId',
+        'localCurrency',
+        'language'
     ],
     'links': [
         'fields',
         'trackingId',
         'urls'
     ],
+
     'completed_orders': [
         'appSignature',
         'startDate',
