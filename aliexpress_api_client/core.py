@@ -55,7 +55,7 @@ class AliExpress(object):
         else:
             return None
 
-    def get_product_details(self, fields, product_id):
+    def get_product_details(self, fields, product_id, **kwargs):
         if not isinstance(fields, list):
             raise ValueError('Parameter %s must be a list', 'fields')
 
@@ -67,6 +67,12 @@ class AliExpress(object):
             'fields': ','.join(fields),
             'productId': product_id
         }
+
+        for param, value in kwargs.items():
+            if param not in ALIBABA_API_PARAMS['details']:
+                raise ValueError('Parameter %s must be in %s' % (param, str(ALIBABA_API_PARAMS['details'])))
+
+            params[param] = value
 
         response = self._make_call('details', params)
 
