@@ -111,11 +111,33 @@ class AliExpress(object):
         else:
             return None
 
-    def get_similar_products(self, productId):
+    def get_hot_products(self, categoryId, **kwargs):
+        params = {
+            'categoryId': categoryId,
+        }
+        for param, value in kwargs.items():
+            if param not in ALIBABA_API_PARAMS['hot_products']:
+                raise ValueError('Parameter %s must be in %s' % (param, str(ALIBABA_API_PARAMS['hot_products'])))
+
+            params[param] = value
+
+        response = self._make_call('hot_products', params)
+        if 'result' in response:
+            return response['result']
+        else:
+            return None
+
+    def get_similar_products(self, productId, **kwargs):
 
         params = {
             'productId': productId,
         }
+        for param, value in kwargs.items():
+            if param not in ALIBABA_API_PARAMS['similar']:
+                raise ValueError('Parameter %s must be in %s' % (param, str(ALIBABA_API_PARAMS['similar'])))
+
+            params[param] = value
+
         response = self._make_call('similar', params)
 
         if 'result' in response:

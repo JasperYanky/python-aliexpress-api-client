@@ -4,6 +4,7 @@ ALIBABA_API_CALLS = {
     'list': 'api.listPromotionProduct',
     'details': 'api.getPromotionProductDetail',
     'links': 'api.getPromotionLinks',
+    'hot_products': 'api.listHotProducts',
     'similar': 'api.listSimilarProducts',
     'completed_orders': 'api.getCompletedOrders',
 
@@ -47,8 +48,14 @@ ALIBABA_API_PARAMS = {
         'pageNo',
         'pageSize'
     ],
+    'hot_products': [
+        'language',
+        'categoryId',
+        'localCurrency'
+    ],
     'similar': [
-        'productId'
+        'productId',
+        'language'
     ]
 }
 
@@ -219,6 +226,13 @@ ALIBABA_API_ERROR_CODES = {
         20030140: 'Page number input parameter error',
         20030150: 'Page size input parameter error'
     },
+
+    'hot_products': {
+        20010000: 'Call succeeds',
+        20020000: 'System Error',
+        20030070: 'Unauthorized transfer request'
+    },
+
     'similar': {
         20010000: 'Call succeeds',
         20020000: 'System Error',
