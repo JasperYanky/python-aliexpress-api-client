@@ -152,8 +152,6 @@ class AliExpress(object):
             'call_parameters': urlencode(params)
         }
 
-        print(url)
-
         LOGGER.info('Perform API request url: %s' % url)
         response = urlopen(url)
 
