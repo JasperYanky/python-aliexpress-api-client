@@ -7,6 +7,7 @@ ALIBABA_API_CALLS = {
     'hot_products': 'api.listHotProducts',
     'similar': 'api.listSimilarProducts',
     'completed_orders': 'api.getCompletedOrders',
+    'banner': 'api.listPromotionCreative'
 
 }
 
@@ -39,7 +40,13 @@ ALIBABA_API_PARAMS = {
         'trackingId',
         'urls'
     ],
-
+    'banner': [
+        'appSignature',
+        'category',
+        'language',
+        'pageNo',
+        'pageSize'
+    ],
     'completed_orders': [
         'appSignature',
         'startDate',
@@ -218,6 +225,14 @@ ALIBABA_API_ERROR_CODES = {
         20030070: 'Tracking ID input parameter error',
         20030080: 'URL input parameter error or beyond the maximum number of the URLs'
     },
+    'banner': {
+        20010000: 'Call succeeds',
+        20020000: 'System Error',
+        20030000: 'Required Parameter error',
+        20030070: 'Unauthorized transfer request',
+        20030140: 'Page number input parameter error',
+        20030150: 'Page size input parameter error'
+    },
     'completed_orders': {
         20010000: 'Call succeeds',
         20020000: 'System Error',
@@ -226,13 +241,11 @@ ALIBABA_API_ERROR_CODES = {
         20030140: 'Page number input parameter error',
         20030150: 'Page size input parameter error'
     },
-
     'hot_products': {
         20010000: 'Call succeeds',
         20020000: 'System Error',
         20030070: 'Unauthorized transfer request'
     },
-
     'similar': {
         20010000: 'Call succeeds',
         20020000: 'System Error',

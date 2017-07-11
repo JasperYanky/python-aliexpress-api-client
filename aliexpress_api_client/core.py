@@ -111,6 +111,32 @@ class AliExpress(object):
         else:
             return None
 
+    def get_banner(self, category, **kwargs):
+        if not category:
+            category = 'all'
+        params = {
+            'category': category,
+            'appSignature': self.app_signature,
+        }
+
+        for param, value in kwargs.items():
+            if param not in ALIBABA_API_PARAMS['banner']:
+                raise ValueError('Parameter %s must be in %s' % (param, str(ALIBABA_API_PARAMS['banner'])))
+            params[param] = value
+
+        if 'language' not in params:
+            raise ValueError('language  must be in banner')
+
+        if 'pageNo' not in params:
+            raise ValueError('pageNo  must be in banner')
+
+        response = self._make_call('banner', params)
+
+        if 'result' in response:
+            return response['result']
+        else:
+            return None
+
     def get_hot_products(self, categoryId, **kwargs):
         params = {
             'categoryId': categoryId,
@@ -153,6 +179,7 @@ class AliExpress(object):
         }
 
         LOGGER.info('Perform API request url: %s' % url)
+
         response = urlopen(url)
 
         if response.code != 200:
