@@ -10,7 +10,7 @@ except ImportError:
     # python 2.x
     from urllib import urlopen, urlencode
 
-from .config import ALIBABA_API_URL, ALIBABA_API_CALLS, ALIBABA_API_FIELDS, ALIBABA_API_PARAMS, ALIBABA_API_CATEGORIES
+from .config import ALIBABA_API_URL_V2, ALIBABA_API_URL_V3, ALIBABA_API_CALLS, ALIBABA_API_FIELDS, ALIBABA_API_PARAMS, ALIBABA_API_CATEGORIES
 from .errors import *
 
 LOGGER = logging.getLogger(__name__)
@@ -164,23 +164,23 @@ class AliExpress(object):
 
             params[param] = value
 
-        response = self._make_call('similar', params)
+        response = self._make_call('similar', params, v=3)
 
         if 'result' in response:
             return response['result']
         else:
             return None
 
-    def _make_call(self, call, params, v=1):
+    def _make_call(self, call, params, v=2):
 
-        if v == 1:
-            url = ALIBABA_API_URL % {
+        if v == 2:
+            url = ALIBABA_API_URL_V2 % {
                 'api_call': ALIBABA_API_CALLS[call],
                 'api_key': self.api_key,
                 'call_parameters': urlencode(params)
             }
         else:
-            url = ALIBABA_API_URL2 % {
+            url = ALIBABA_API_URL_V3 % {
                 'api_call': ALIBABA_API_CALLS[call],
                 'api_key': self.api_key,
                 'call_parameters': urlencode(params)

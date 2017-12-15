@@ -6,6 +6,13 @@ Python client library for AliExpress API
 Usage example
 ------------
 
+**Install:**
+```
+pip install git+https://github.com/JasperYanky/python-aliexpress-api-client --upgrade
+
+```
+
+
 **Configuration:**
 ``` python
 from aliexpress_api_client import AliExpress
