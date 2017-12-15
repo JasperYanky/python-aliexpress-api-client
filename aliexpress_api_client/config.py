@@ -1,4 +1,5 @@
 ALIBABA_API_URL = 'http://gw.api.alibaba.com/openapi/param2/2/portals.open/%(api_call)s/%(api_key)s?%(call_parameters)s'
+ALIBABA_API_URL2 = 'http://gw.api.alibaba.com/openapi/param2/3/portals.open/%(api_call)s/%(api_key)s?%(call_parameters)s'
 
 ALIBABA_API_CALLS = {
     'list': 'api.listPromotionProduct',

@@ -171,12 +171,20 @@ class AliExpress(object):
         else:
             return None
 
-    def _make_call(self, call, params):
-        url = ALIBABA_API_URL % {
-            'api_call': ALIBABA_API_CALLS[call],
-            'api_key': self.api_key,
-            'call_parameters': urlencode(params)
-        }
+    def _make_call(self, call, params, v=1):
+
+        if v == 1:
+            url = ALIBABA_API_URL % {
+                'api_call': ALIBABA_API_CALLS[call],
+                'api_key': self.api_key,
+                'call_parameters': urlencode(params)
+            }
+        else:
+            url = ALIBABA_API_URL2 % {
+                'api_call': ALIBABA_API_CALLS[call],
+                'api_key': self.api_key,
+                'call_parameters': urlencode(params)
+            }
 
         LOGGER.info('Perform API request url: %s' % url)
 
